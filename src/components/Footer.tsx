@@ -56,6 +56,7 @@ const Footer = () => {
         { label: "Editorial Policy", to: "/editorial-policy" },
         { label: "Disclaimer", to: "/disclaimer" },
         { label: "Terms & Conditions", to: "/terms-and-conditions" },
+        { label: "Sitemap", to: "/sitemap.xml" },
       ],
     },
   ];

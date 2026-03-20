@@ -56,7 +56,7 @@ const Header = () => {
     <header className="border-b border-border bg-background/95 backdrop-blur">
       <div className="mx-auto flex max-w-7xl flex-col items-center px-4 py-5 relative">
         <Link to="/" className="text-center">
-          <img src="./logo.webp" alt="Beans News" className="h-10 object-contain md:h-14" />
+          <img src="/logo.webp" alt="Beans News" className="h-10 object-contain md:h-14" />
         </Link>
         <p className="mt-2 text-sm text-muted-foreground">{today}</p>
       </div>
