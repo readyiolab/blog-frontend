@@ -1,12 +1,44 @@
 import { Menu, Search } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { sectionConfigs } from "@/lib/seo";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { categoryService } from "@/services/categoryService";
+import type { PublicCategory } from "@/types/content";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [categories, setCategories] = useState<PublicCategory[]>([]);
   const { pathname } = useLocation();
+  
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await categoryService.getAll();
+        setCategories(response.data || []);
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+        setCategories([]);
+      }
+    };
+    void fetchCategories();
+  }, []);
+
+  const navItems = useMemo(() => {
+    // If no categories from backend, fallback to some default section configs
+    if (!categories.length) {
+      return sectionConfigs.filter(s => s.slug !== 'latest-news');
+    }
+
+    // Merge backend categories with sectionConfigs for SEO/Labels
+    return categories.map(cat => {
+      const config = sectionConfigs.find(s => s.backendSlug === cat.slug || s.slug === cat.slug);
+      return {
+        slug: cat.slug,
+        label: config?.label || cat.category_name,
+      };
+    });
+  }, [categories]);
 
   // Close mobile menu whenever route changes
   useEffect(() => {
@@ -53,17 +85,25 @@ const Header = () => {
                     Home
                   </NavLink>
                   <div className="border-t my-2"></div>
-                  {sectionConfigs.map((section) => (
+                  {navItems.map((item) => (
                     <NavLink
-                      key={section.slug}
-                      to={`/${section.slug}`}
+                      key={item.slug}
+                      to={`/${item.slug}`}
                       className={({ isActive }) => 
                         `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
                       }
                     >
-                      {section.label}
+                      {item.label}
                     </NavLink>
                   ))}
+                  <NavLink
+                    to="/latest-news"
+                    className={({ isActive }) =>
+                      `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
+                    }
+                  >
+                    Latest News
+                  </NavLink>
                 </nav>
               </div>
             </SheetContent>
@@ -83,20 +123,32 @@ const Header = () => {
                   Home
                 </NavLink>
               </li>
-              {sectionConfigs.map((section) => (
-                <li key={section.slug}>
+              {navItems.map((item) => (
+                <li key={item.slug}>
                   <NavLink
-                    to={`/${section.slug}`}
+                    to={`/${item.slug}`}
                     className={({ isActive }) =>
                       `inline-block px-3 py-3 text-sm font-semibold tracking-wide hover:text-primary ${
                         isActive ? "border-b-2 border-primary text-primary" : "text-foreground"
                       }`
                     }
                   >
-                    {section.label}
+                    {item.label}
                   </NavLink>
                 </li>
               ))}
+              <li>
+                <NavLink
+                  to="/latest-news"
+                  className={({ isActive }) =>
+                    `inline-block px-3 py-3 text-sm font-semibold tracking-wide hover:text-primary ${
+                      isActive ? "border-b-2 border-primary text-primary" : "text-foreground"
+                    }`
+                  }
+                >
+                  Latest News
+                </NavLink>
+              </li>
             </ul>
           </div>
           <button className="ml-2 rounded p-2 hover:bg-secondary" aria-label="Search">

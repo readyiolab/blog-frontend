@@ -1,37 +1,64 @@
 import { Link } from "react-router-dom";
-
-const footerGroups = [
-  {
-    title: "Sections",
-    links: [
-      { label: "India News", to: "/india-news" },
-      { label: "World News", to: "/world-news" },
-      { label: "Business News", to: "/business-news" },
-      { label: "Finance News", to: "/finance-news" },
-      { label: "Sports News", to: "/sports-news" },
-      { label: "Health & Wellness", to: "/health-wellness" },
-    ],
-  },
-  {
-    title: "Company",
-    links: [
-      { label: "About Us", to: "/about-us" },
-      { label: "Contact Us", to: "/contact-us" },
-      { label: "Write For Us", to: "/write-for-us" },
-    ],
-  },
-  {
-    title: "Legal",
-    links: [
-      { label: "Privacy Policy", to: "/privacy-policy" },
-      { label: "Editorial Policy", to: "/editorial-policy" },
-      { label: "Disclaimer", to: "/disclaimer" },
-      { label: "Terms & Conditions", to: "/terms-and-conditions" },
-    ],
-  },
-];
+import { useState, useEffect, useMemo } from "react";
+import { categoryService } from "@/services/categoryService";
+import type { PublicCategory } from "@/types/content";
+import { sectionConfigs } from "@/lib/seo";
 
 const Footer = () => {
+  const [categories, setCategories] = useState<PublicCategory[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await categoryService.getAll();
+        setCategories(response.data || []);
+      } catch (err) {
+        console.error("Failed to fetch categories:", err);
+      }
+    };
+    void fetchCategories();
+  }, []);
+
+  const sectionLinks = useMemo(() => {
+    if (!categories.length) {
+      return sectionConfigs
+        .filter(s => s.slug !== 'latest-news')
+        .slice(0, 6)
+        .map(s => ({ label: s.label, to: `/${s.slug}` }));
+    }
+
+    return categories.map(cat => {
+      const config = sectionConfigs.find(s => s.backendSlug === cat.slug || s.slug === cat.slug);
+      return {
+        label: config?.label || cat.category_name,
+        to: `/${cat.slug}`,
+      };
+    });
+  }, [categories]);
+
+  const footerGroups = [
+    {
+      title: "Sections",
+      links: sectionLinks,
+    },
+    {
+      title: "Company",
+      links: [
+        { label: "About Us", to: "/about-us" },
+        { label: "Contact Us", to: "/contact-us" },
+        { label: "Write For Us", to: "/write-for-us" },
+      ],
+    },
+    {
+      title: "Legal",
+      links: [
+        { label: "Privacy Policy", to: "/privacy-policy" },
+        { label: "Editorial Policy", to: "/editorial-policy" },
+        { label: "Disclaimer", to: "/disclaimer" },
+        { label: "Terms & Conditions", to: "/terms-and-conditions" },
+      ],
+    },
+  ];
   return (
     <footer className="mt-12 bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-4 py-10">

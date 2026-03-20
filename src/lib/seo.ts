@@ -39,13 +39,29 @@ export const sectionConfigs: SectionConfig[] = [
     keywords: ["world news today", "international news", "global politics news", "latest world headlines", "global economy news"],
   },
   {
-    slug: "business-news",
-    backendSlug: "business-news",
-    label: "Business News",
+    slug: "business",
+    backendSlug: "business",
+    label: "Business",
     metaTitle: "Business News Today - US Markets, Companies & Economy",
     metaDescription:
       "Latest US business news, company updates, startups, and economic trends affecting global markets.",
     keywords: ["business news USA", "company news", "startup news", "US economy news", "corporate news"],
+  },
+  {
+    slug: "technology",
+    backendSlug: "technology",
+    label: "Technology",
+    metaTitle: "Technology News - Gadgets, AI & Tech Trends",
+    metaDescription: "Follow latest technology news, gadgets, AI developments and tech industry updates.",
+    keywords: ["tech news", "gadgets", "artificial intelligence", "tech reviews"],
+  },
+  {
+    slug: "entertainment",
+    backendSlug: "entertainment",
+    label: "Entertainment",
+    metaTitle: "Entertainment News - Movies, Music & Celebrity Updates",
+    metaDescription: "Latest entertainment news covering movies, music, celebrities and pop culture.",
+    keywords: ["entertainment news", "movie news", "celebrity gossip", "music updates"],
   },
   {
     slug: "finance-news",
