@@ -226,7 +226,9 @@ const ArticlePage = () => {
                   className="h-auto w-full object-cover max-h-[600px]"
                   loading="eager"
                   fetchPriority="high"
-                  decoding="async"
+                  width="1200"
+                  height="675"
+                  decoding="sync"
                 />
                 {article.featured_image_alt && (
                   <figcaption className="p-3 text-xs italic text-muted-foreground bg-card border-t">

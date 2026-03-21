@@ -95,8 +95,8 @@ const SectionPage = () => {
             ) : null}
 
             <div className="grid gap-8 md:grid-cols-2">
-              {articles.map((article) => (
-                <ArticleCard key={article.id} article={article} />
+              {articles.map((article, index) => (
+                <ArticleCard key={article.id} article={article} priority={index < 2} />
               ))}
             </div>
           </div>

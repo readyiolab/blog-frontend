@@ -81,7 +81,7 @@ const Index = () => {
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.35em] text-primary">
               Breaking News
             </p>
-            {leadArticle ? <ArticleCard article={leadArticle} /> : null}
+            {leadArticle ? <ArticleCard article={leadArticle} priority={true} /> : null}
           </div>
           <div className="rounded-2xl border border-border bg-card p-6">
             <h2 className="mb-4 text-2xl font-semibold">Top Stories USA</h2>

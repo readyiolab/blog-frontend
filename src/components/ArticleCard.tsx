@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { formatArticleDate } from "@/lib/seo";
 import type { PublicArticle } from "@/types/content";
 
-const ArticleCard = ({ article }: { article: PublicArticle }) => {
+const ArticleCard = ({ article, priority = false }: { article: PublicArticle; priority?: boolean }) => {
   const sectionSlug = article.category_slug || "latest-news";
   const articleUrl = `/${sectionSlug}/${article.slug}`;
   const authorName =
@@ -15,13 +15,16 @@ const ArticleCard = ({ article }: { article: PublicArticle }) => {
   return (
     <article className="overflow-hidden rounded-xl border border-border bg-card">
       {article.featured_image ? (
-        <Link to={articleUrl}>
+        <Link to={articleUrl} className="block aspect-[16/9] overflow-hidden">
           <img
             src={article.featured_image}
             alt={article.featured_image_alt || article.title}
-            className="h-52 w-full object-cover"
-            loading="lazy"
-            decoding="async"
+            className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+            loading={priority ? "eager" : "lazy"}
+            fetchPriority={priority ? "high" : "auto"}
+            width="800"
+            height="450"
+            decoding={priority ? "sync" : "async"}
           />
         </Link>
       ) : null}
