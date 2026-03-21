@@ -31,10 +31,10 @@ export default defineConfig(({ mode }) => ({
             params: {
               overrides: {
                 cleanupIds: false,
-                removeViewBox: false,
               },
             },
           },
+          'removeViewBox',
           'sortAttrs',
           {
             name: 'addAttributesToSVGElement',
