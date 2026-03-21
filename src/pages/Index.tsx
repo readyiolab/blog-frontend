@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { Skeleton } from "@/components/ui/skeleton";
 import ArticleCard from "@/components/ArticleCard";
 import PublicLayout from "@/components/PublicLayout";
 import SEOHead from "@/components/SEOHead";
@@ -58,6 +59,25 @@ const Index = () => {
   }, [latest]);
   const leadArticle = featured[0] || latest[0];
   const topStories = latest.slice(1, 5);
+
+  if (loading) {
+    return (
+      <PublicLayout>
+        <section className="mx-auto max-w-7xl px-4 py-8">
+          <div className="mb-8 grid gap-6 lg:grid-cols-[1.4fr_0.9fr]">
+            <Skeleton className="h-[400px] w-full rounded-2xl" />
+            <div className="space-y-4">
+              <Skeleton className="h-8 w-48" />
+              {[1, 2, 3, 4].map(i => <Skeleton key={i} className="h-24 w-full" />)}
+            </div>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+             {[1, 2, 3, 4, 5, 6].map(i => <Skeleton key={i} className="h-[300px] w-full" />)}
+          </div>
+        </section>
+      </PublicLayout>
+    );
+  }
 
   return (
     <PublicLayout>

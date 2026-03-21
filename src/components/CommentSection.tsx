@@ -56,7 +56,12 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
             await commentService.addComment({ articleId, content });
             setNewComment("");
             if(!token) setGuestName("");
-            toast.success("Comment submitted! It will appear once approved.");
+            
+            // Reload comments to show the new one immediately
+            const response = await commentService.getForArticle(articleId);
+            setComments(response.data || []);
+            
+            toast.success("Comment posted successfully!");
         } catch {
             toast.error("Failed to post comment");
         } finally {

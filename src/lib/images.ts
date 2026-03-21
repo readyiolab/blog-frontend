@@ -7,13 +7,25 @@ export const getOptimizedImageUrl = (url: string | undefined | null, width?: num
   
   // If it's a Cloudinary URL, add auto-format and auto-quality
   if (url.includes("cloudinary.com")) {
-    // Check if it already has transformations
     if (url.includes("/upload/")) {
       const parts = url.split("/upload/");
-      const transformation = `f_auto,q_auto${width ? `,w_${width}` : ""}`;
+      const transformation = `f_auto,q_auto${width ? `,w_${width},c_fill` : ""}`;
       return `${parts[0]}/upload/${transformation}/${parts[1]}`;
     }
   }
   
   return url;
+};
+
+/**
+ * Generates a srcset string for Cloudinary images to support responsive sizing.
+ */
+export const getCloudinarySrcSet = (url: string | undefined | null, widths: number[] = [400, 640, 800, 1200]) => {
+  if (!url || !url.includes("cloudinary.com") || !url.includes("/upload/")) {
+    return "";
+  }
+  
+  return widths
+    .map((w) => `${getOptimizedImageUrl(url, w)} ${w}w`)
+    .join(", ");
 };

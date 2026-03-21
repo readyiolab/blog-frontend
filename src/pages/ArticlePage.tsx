@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import PublicLayout from "@/components/PublicLayout";
 import SEOHead from "@/components/SEOHead";
 import { SITE_URL, formatArticleDate } from "@/lib/seo";
-import { getOptimizedImageUrl } from "@/lib/images";
+import { getOptimizedImageUrl, getCloudinarySrcSet } from "@/lib/images";
 import { articleService } from "@/services/articleService";
 import type { PublicArticle } from "@/types/content";
 import ArticleSidebar from "@/components/ArticleSidebar";
@@ -223,6 +223,8 @@ const ArticlePage = () => {
               <figure className="mb-8 overflow-hidden rounded-xl border bg-muted">
                 <img
                   src={getOptimizedImageUrl(article.featured_image, 1200)}
+                  srcSet={getCloudinarySrcSet(article.featured_image)}
+                  sizes="(max-width: 768px) 100vw, 1200px"
                   alt={article.featured_image_alt || article.title}
                   className="h-auto w-full object-cover max-h-[600px]"
                   loading="eager"

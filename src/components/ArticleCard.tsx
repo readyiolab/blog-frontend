@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatArticleDate } from "@/lib/seo";
-import { getOptimizedImageUrl } from "@/lib/images";
+import { getOptimizedImageUrl, getCloudinarySrcSet } from "@/lib/images";
 import type { PublicArticle } from "@/types/content";
 
 const ArticleCard = ({ article, priority = false }: { article: PublicArticle; priority?: boolean }) => {
@@ -19,6 +19,8 @@ const ArticleCard = ({ article, priority = false }: { article: PublicArticle; pr
         <Link to={articleUrl} className="block aspect-[16/9] overflow-hidden">
           <img
             src={getOptimizedImageUrl(article.featured_image, priority ? 1200 : 800)}
+            srcSet={getCloudinarySrcSet(article.featured_image)}
+            sizes={priority ? "(max-width: 768px) 100vw, 800px" : "(max-width: 768px) 100vw, 400px"}
             alt={article.featured_image_alt || article.title}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
             loading={priority ? "eager" : "lazy"}
