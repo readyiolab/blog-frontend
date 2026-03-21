@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { articleService } from "@/services/articleService";
+import NewsletterForm from "./NewsletterForm";
 import type { PublicArticle } from "@/types/content";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -118,16 +119,7 @@ const ArticleSidebar = () => {
                     <p className="text-xs mb-4 opacity-90">
                         Get the latest news and insights delivered to your inbox daily.
                     </p>
-                    <div className="flex gap-2">
-                        <input
-                            type="email"
-                            placeholder="Email address"
-                            className="bg-white/10 border border-white/20 rounded-md px-3 py-2 text-sm w-full placeholder:text-white/50 focus:outline-none"
-                        />
-                        <button className="bg-white text-primary px-3 py-2 rounded-md font-bold text-xs hover:bg-white/90 transition-colors">
-                            Join
-                        </button>
-                    </div>
+                    <NewsletterForm variant="sidebar" />
                 </CardContent>
             </Card>
         </div>
