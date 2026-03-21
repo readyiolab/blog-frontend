@@ -6,7 +6,9 @@ import SEOHead from "@/components/SEOHead";
 import { homepageMeta, sectionConfigs } from "@/lib/seo";
 import { articleService } from "@/services/articleService";
 import { categoryService } from "@/services/categoryService";
+import { newsletterService } from "@/services/newsletterService";
 import type { PublicArticle, PublicCategory } from "@/types/content";
+import { toast } from "sonner";
 
 const groupBySection = (articles: PublicArticle[]) =>
   sectionConfigs.reduce<Record<string, PublicArticle[]>>((accumulator, section) => {
@@ -22,6 +24,24 @@ const Index = () => {
   const [latest, setLatest] = useState<PublicArticle[]>([]);
   const [categories, setCategories] = useState<PublicCategory[]>([]);
   const [loading, setLoading] = useState(true);
+  const [email, setEmail] = useState("");
+  const [subscribing, setSubscribing] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email.trim()) return;
+
+    setSubscribing(true);
+    try {
+      await newsletterService.subscribe({ email: email.trim() });
+      setEmail("");
+      toast.success("Thank you for subscribing to our newsletter!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to subscribe. Please try again.");
+    } finally {
+      setSubscribing(false);
+    }
+  };
 
   useEffect(() => {
     const loadHomepage = async () => {
@@ -141,16 +161,24 @@ const Index = () => {
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
             Get breaking US and global news alerts, business updates, and editorial picks delivered daily.
           </p>
-          <div className="mt-4 flex flex-col gap-3 md:flex-row">
+          <form onSubmit={handleSubscribe} className="mt-4 flex flex-col gap-3 md:flex-row">
             <input
               type="email"
               placeholder="Enter your email"
-              className="h-11 flex-1 rounded-md border border-input bg-background px-4"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              disabled={subscribing}
+              className="h-11 flex-1 rounded-md border border-input bg-background px-4 focus:outline-none focus:ring-2 focus:ring-primary/20"
             />
-            <button className="h-11 rounded-md bg-primary px-6 font-semibold text-primary-foreground">
-              Subscribe
+            <button 
+              type="submit"
+              disabled={subscribing}
+              className="h-11 rounded-md bg-primary px-6 font-semibold text-primary-foreground transition-opacity hover:opacity-90 disabled:opacity-50"
+            >
+              {subscribing ? "Subscribing..." : "Subscribe"}
             </button>
-          </div>
+          </form>
         </section>
       </section>
     </PublicLayout>

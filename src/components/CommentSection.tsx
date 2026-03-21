@@ -23,8 +23,10 @@ interface CommentSectionProps {
 const CommentSection = ({ articleId }: CommentSectionProps) => {
     const [comments, setComments] = useState<Comment[]>([]);
     const [newComment, setNewComment] = useState("");
+    const [guestName, setGuestName] = useState("");
     const [loading, setLoading] = useState(true);
     const [submitting, setSubmitting] = useState(false);
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         const loadComments = async () => {
@@ -45,16 +47,15 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
         e.preventDefault();
         if (!newComment.trim()) return;
 
-        const token = localStorage.getItem("token");
-        if (!token) {
-            toast.error("Please login to post a comment");
-            return;
-        }
-
         setSubmitting(true);
         try {
-            await commentService.addComment({ articleId, content: newComment.trim() });
+            const content = token 
+                ? newComment.trim() 
+                : `${guestName.trim() || 'Guest'}: ${newComment.trim()}`;
+                
+            await commentService.addComment({ articleId, content });
             setNewComment("");
+            if(!token) setGuestName("");
             toast.success("Comment submitted! It will appear once approved.");
         } catch {
             toast.error("Failed to post comment");
@@ -73,6 +74,16 @@ const CommentSection = ({ articleId }: CommentSectionProps) => {
             <div className="bg-muted/30 rounded-2xl p-6 mb-10">
                 <h3 className="font-bold mb-4">Leave a Reply</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    {!token && (
+                        <input
+                            type="text"
+                            placeholder="Your Name (Optional)"
+                            value={guestName}
+                            onChange={(e) => setGuestName(e.target.value)}
+                            className="w-full h-11 rounded-md border border-input bg-white px-4 text-sm focus:outline-none focus:ring-2 focus:ring-primary/20"
+                            disabled={submitting}
+                        />
+                    )}
                     <Textarea
                         placeholder="What are your thoughts on this story?"
                         value={newComment}

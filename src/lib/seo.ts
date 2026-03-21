@@ -73,8 +73,8 @@ export const sectionConfigs: SectionConfig[] = [
     keywords: ["finance news", "stock market news", "inflation news", "federal reserve news", "crypto market news"],
   },
   {
-    slug: "sports-news",
-    backendSlug: "sports-news",
+    slug: "sports",
+    backendSlug: "sports",
     label: "Sports News",
     metaTitle: "Sports News - NBA, NFL, Soccer & Global Sports",
     metaDescription:

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { formatArticleDate } from "@/lib/seo";
+import { getOptimizedImageUrl } from "@/lib/images";
 import type { PublicArticle } from "@/types/content";
 
 const ArticleCard = ({ article, priority = false }: { article: PublicArticle; priority?: boolean }) => {
@@ -17,7 +18,7 @@ const ArticleCard = ({ article, priority = false }: { article: PublicArticle; pr
       {article.featured_image ? (
         <Link to={articleUrl} className="block aspect-[16/9] overflow-hidden">
           <img
-            src={article.featured_image}
+            src={getOptimizedImageUrl(article.featured_image, priority ? 1200 : 800)}
             alt={article.featured_image_alt || article.title}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
             loading={priority ? "eager" : "lazy"}
