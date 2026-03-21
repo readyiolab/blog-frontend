@@ -20,11 +20,11 @@ const ArticleCard = ({ article, priority = false }: { article: PublicArticle; pr
           <img
             src={getOptimizedImageUrl(article.featured_image, priority ? 1200 : 800)}
             srcSet={getCloudinarySrcSet(article.featured_image)}
-            sizes={priority ? "(max-width: 768px) 100vw, 800px" : "(max-width: 768px) 100vw, 400px"}
+            sizes={priority ? "(max-width: 1024px) 100vw, 850px" : "(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"}
             alt={article.featured_image_alt || article.title}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
             loading={priority ? "eager" : "lazy"}
-            fetchPriority={priority ? "high" : "auto"}
+            fetchPriority={priority ? "high" : "low"}
             width="800"
             height="450"
             decoding={priority ? "sync" : "async"}

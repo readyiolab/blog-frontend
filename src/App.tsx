@@ -34,7 +34,7 @@ const App = () => (
       <BrowserRouter>
         <Suspense fallback={<LoadingFallback />}>
             <Routes>
-              <Route path="/" element={<Index />} />
+            <Route path="/" element={<Index />} />
             <Route path="/:sectionSlug" element={<SectionPage />} />
             <Route path="/:sectionSlug/:articleSlug" element={<ArticlePage />} />
             <Route path="/about-us" element={<StaticPage pageSlug="about-us" />} />
