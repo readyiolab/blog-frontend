@@ -17,6 +17,5 @@ https.get(SITEMAP_URL, (res) => {
   });
 }).on('error', (err) => {
   console.error('⚠️ Failed to fetch sitemap:', err.message);
-  // Don't fail the build if sitemap fetch fails — the old copy stays
   process.exit(0);
 });
