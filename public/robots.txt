@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://beansnews.com/api/sitemap
+Sitemap: https://beansnews.com/sitemap.xml
