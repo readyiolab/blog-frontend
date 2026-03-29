@@ -1,26 +1,22 @@
-import fs from 'fs';
-import https from 'https';
-import path from 'path';
+// Script to fetch the latest sitemap from the API and save it to public/
+// This runs automatically before each build via the "prebuild" npm script.
 
-const url = 'https://api.beansnews.com/sitemap.xml';
-const dest = path.resolve('public', 'sitemap.xml');
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
 
-console.log('Fetching sitemap from API...');
+const SITEMAP_URL = 'https://api.beansnews.com/sitemap.xml';
+const OUTPUT_PATH = path.join(__dirname, '..', 'public', 'sitemap.xml');
 
-https.get(url, (res) => {
-  if (res.statusCode !== 200) {
-    console.error(`Failed to fetch sitemap: HTTP ${res.statusCode}`);
-    process.exit(0); // Exit 0 so build doesn't fail if API is down
-  }
-
-  const file = fs.createWriteStream(dest);
-  res.pipe(file);
-
-  file.on('finish', () => {
-    file.close();
-    console.log('Successfully saved sitemap to public/sitemap.xml');
+https.get(SITEMAP_URL, (res) => {
+  let data = '';
+  res.on('data', (chunk) => { data += chunk; });
+  res.on('end', () => {
+    fs.writeFileSync(OUTPUT_PATH, data);
+    console.log('✅ sitemap.xml updated successfully');
   });
 }).on('error', (err) => {
-  console.error('Error fetching sitemap:', err.message);
-  process.exit(0); // Exit 0 so build doesn't fail
+  console.error('⚠️ Failed to fetch sitemap:', err.message);
+  // Don't fail the build if sitemap fetch fails — the old copy stays
+  process.exit(0);
 });
