@@ -1,7 +1,7 @@
 {
   "headers": [
     {
-      "source": "/assets/:path*",
+      "source": "/assets/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -10,7 +10,7 @@
       ]
     },
     {
-      "source": "/:path*.(ico|jpg|jpeg|png|gif|svg|webp|avif|js|css|woff|woff2)",
+      "source": "/(.*)\\.(ico|jpg|jpeg|png|gif|svg|webp|avif|js|css|woff|woff2)",
       "headers": [
         {
           "key": "Cache-Control",
