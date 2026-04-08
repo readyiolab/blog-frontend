@@ -253,9 +253,7 @@ const ArticlePage = () => {
             ) : null}
 
             <div
-              className="prose prose-zinc dark:prose-invert prose-lg max-w-none 
-                prose-headings:font-bold prose-a:text-primary prose-a:no-underline hover:prose-a:underline
-                prose-img:rounded-xl prose-img:border prose-img:shadow-md"
+              className="article-content"
               dangerouslySetInnerHTML={{ __html: article.content || "<p>No content available.</p>" }}
             />
 
