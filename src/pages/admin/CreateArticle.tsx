@@ -6,6 +6,13 @@ import { toast } from "sonner";
 import { Save, FileCheck2, LayoutDashboard } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
+const getPlainTextFromHtml = (html: string) =>
+    html
+        .replace(/<[^>]*>/g, ' ')
+        .replace(/&nbsp;/gi, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
 export default function CreateArticle() {
     const [title, setTitle] = useState("");
     const [slug, setSlug] = useState("");
@@ -34,7 +41,8 @@ export default function CreateArticle() {
             return;
         }
 
-        if (!content || content === '<p></p>') {
+        const plainContent = getPlainTextFromHtml(content);
+        if (!plainContent) {
             toast.error('Article Content cannot be empty');
             return;
         }
@@ -47,8 +55,8 @@ export default function CreateArticle() {
                 title,
                 slug,
                 content,
-                category_id: 1, // Placeholder: you would normally have a category dropdown
-                excerpt: content.substring(0, 150).replace(/(<([^>]+)>)/gi, ""), // Strip HTML for excerpt
+                categoryId: 1, // Placeholder: you would normally have a category dropdown
+                excerpt: plainContent.substring(0, 150),
                 status: 'published'
             };
 
