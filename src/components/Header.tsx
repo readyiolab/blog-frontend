@@ -1,17 +1,18 @@
 import { Menu, Search } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { sectionConfigs } from "@/lib/seo";
-import { useState, useEffect } from "react";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
+import { useEffect, useRef } from "react";
 
 const Header = () => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { pathname } = useLocation();
   const navItems = sectionConfigs.filter((section) => section.slug !== "latest-news");
+  const mobileDetailsRef = useRef<HTMLDetailsElement | null>(null);
 
   // Close mobile menu whenever route changes
   useEffect(() => {
-    setIsMobileMenuOpen(false);
+    if (mobileDetailsRef.current) {
+      mobileDetailsRef.current.open = false;
+    }
   }, [pathname]);
 
   const today = new Date().toLocaleDateString("en-US", {
@@ -38,52 +39,47 @@ const Header = () => {
 
       <nav className="border-t border-border">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:justify-start">
-          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <button
-                className="mr-2 rounded p-2 hover:bg-secondary lg:hidden"
-                aria-label="Open menu"
-              >
-                <Menu className="h-6 w-6" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-              <div className="mt-6 flex flex-col gap-4">
-                <nav className="flex flex-col space-y-4">
+          <details ref={mobileDetailsRef} className="mr-2 lg:hidden">
+            <summary
+              className="list-none rounded p-2 hover:bg-secondary"
+              aria-label="Open menu"
+            >
+              <Menu className="h-6 w-6" />
+            </summary>
+            <div className="absolute left-0 top-full z-50 w-[300px] max-w-[85vw] border-r border-border bg-background p-4 shadow-xl">
+              <nav className="flex flex-col space-y-4">
+                <NavLink
+                  to="/"
+                  className={({ isActive }) =>
+                    `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
+                  }
+                >
+                  Home
+                </NavLink>
+                <div className="border-t my-2"></div>
+                {navItems.map((item) => (
                   <NavLink
-                    to="/"
+                    key={item.slug}
+                    to={`/${item.slug}`}
                     className={({ isActive }) =>
                       `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
                     }
                   >
-                    Home
+                    {item.label}
                   </NavLink>
-                  <div className="border-t my-2"></div>
-                  {navItems.map((item) => (
-                    <NavLink
-                      key={item.slug}
-                      to={`/${item.slug}`}
-                      className={({ isActive }) =>
-                        `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
-                      }
-                    >
-                      {item.label}
-                    </NavLink>
-                  ))}
-                  <NavLink
-                    to="/latest-news"
-                    className={({ isActive }) =>
-                      `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
-                    }
-                  >
-                    Latest News
-                  </NavLink>
-                </nav>
-              </div>
-            </SheetContent>
-          </Sheet>
-
+                ))}
+                <NavLink
+                  to="/latest-news"
+                  className={({ isActive }) =>
+                    `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
+                  }
+                >
+                  Latest News
+                </NavLink>
+              </nav>
+            </div>
+          </details>
+          
           <div className="hidden flex-1 lg:flex">
             <ul className="flex items-center whitespace-nowrap">
               <li>
