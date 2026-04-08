@@ -1,8 +1,7 @@
-import { Menu, Search } from "lucide-react";
+import { Menu, Search, X } from "lucide-react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { sectionConfigs } from "@/lib/seo";
 import { useState, useEffect } from "react";
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "@/components/ui/sheet";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -38,52 +37,16 @@ const Header = () => {
 
       <nav className="border-t border-border">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 lg:justify-start">
-          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
-            <SheetTrigger asChild>
-              <button 
-                className="mr-2 rounded p-2 hover:bg-secondary lg:hidden" 
-                aria-label="Open menu"
-              >
-                <Menu className="h-6 w-6" />
-              </button>
-            </SheetTrigger>
-            <SheetContent side="left" className="w-[300px] sm:w-[400px]">
-              <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
-              <div className="mt-6 flex flex-col gap-4">
-                <nav className="flex flex-col space-y-4">
-                  <NavLink 
-                    to="/" 
-                    className={({ isActive }) => 
-                      `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
-                    }
-                  >
-                    Home
-                  </NavLink>
-                  <div className="border-t my-2"></div>
-                  {navItems.map((item) => (
-                    <NavLink
-                      key={item.slug}
-                      to={`/${item.slug}`}
-                      className={({ isActive }) => 
-                        `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
-                      }
-                    >
-                      {item.label}
-                    </NavLink>
-                  ))}
-                  <NavLink
-                    to="/latest-news"
-                    className={({ isActive }) =>
-                      `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
-                    }
-                  >
-                    Latest News
-                  </NavLink>
-                </nav>
-              </div>
-            </SheetContent>
-          </Sheet>
-          
+          <button
+            type="button"
+            className="mr-2 rounded p-2 hover:bg-secondary lg:hidden"
+            aria-label="Open menu"
+            aria-expanded={isMobileMenuOpen}
+            onClick={() => setIsMobileMenuOpen(true)}
+          >
+            <Menu className="h-6 w-6" />
+          </button>
+
           <div className="hidden flex-1 lg:flex">
             <ul className="flex items-center whitespace-nowrap">
               <li>
@@ -131,6 +94,61 @@ const Header = () => {
           </button>
         </div>
       </nav>
+
+      {isMobileMenuOpen ? (
+        <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/40"
+            aria-label="Close menu"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <div className="relative h-full w-[300px] max-w-[85vw] bg-background px-5 py-6 shadow-xl">
+            <div className="mb-6 flex items-center justify-between">
+              <span className="text-lg font-semibold">Menu</span>
+              <button
+                type="button"
+                className="rounded p-2 hover:bg-secondary"
+                aria-label="Close menu"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            <nav className="flex flex-col space-y-4">
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
+                }
+              >
+                Home
+              </NavLink>
+              <div className="my-2 border-t" />
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.slug}
+                  to={`/${item.slug}`}
+                  className={({ isActive }) =>
+                    `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+              <NavLink
+                to="/latest-news"
+                className={({ isActive }) =>
+                  `text-lg font-semibold ${isActive ? "text-primary" : "text-foreground"}`
+                }
+              >
+                Latest News
+              </NavLink>
+            </nav>
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 };

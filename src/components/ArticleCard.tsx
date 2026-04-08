@@ -6,6 +6,11 @@ import type { PublicArticle } from "@/types/content";
 const ArticleCard = ({ article, priority = false }: { article: PublicArticle; priority?: boolean }) => {
   const sectionSlug = article.category_slug || "latest-news";
   const articleUrl = `/${sectionSlug}/${article.slug}`;
+  const imageWidths = priority ? [360, 480, 640, 800] : [240, 320, 480, 640];
+  const imageWidth = priority ? 640 : 640;
+  const imageSizes = priority
+    ? "(max-width: 1024px) 100vw, 640px"
+    : "(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 360px";
   const authorName =
     [article.first_name, article.last_name].filter(Boolean).join(" ") ||
     article.username ||
@@ -18,18 +23,15 @@ const ArticleCard = ({ article, priority = false }: { article: PublicArticle; pr
       {article.featured_image ? (
         <Link to={articleUrl} className="block aspect-[16/9] overflow-hidden">
           <img
-            src={getOptimizedImageUrl(article.featured_image, 800)}
-            srcSet={getCloudinarySrcSet(
-              article.featured_image,
-              [320, 480, 640, 800]
-            )}
-            sizes={priority ? "(max-width: 1024px) 100vw, 640px" : "(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"}
+            src={getOptimizedImageUrl(article.featured_image, imageWidth)}
+            srcSet={getCloudinarySrcSet(article.featured_image, imageWidths)}
+            sizes={imageSizes}
             alt={article.featured_image_alt || article.title}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
             loading={priority ? "eager" : "lazy"}
             fetchPriority={priority ? "high" : "low"}
-            width="800"
-            height="450"
+            width="640"
+            height="360"
             decoding={priority ? "sync" : "async"}
           />
         </Link>

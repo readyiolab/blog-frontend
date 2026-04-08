@@ -1,40 +1,11 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect, useMemo } from "react";
-import { categoryService } from "@/services/categoryService";
-import type { PublicCategory } from "@/types/content";
 import { sectionConfigs } from "@/lib/seo";
 
 const Footer = () => {
-  const [categories, setCategories] = useState<PublicCategory[]>([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await categoryService.getAll();
-        setCategories(response.data || []);
-      } catch (err) {
-        console.error("Failed to fetch categories:", err);
-      }
-    };
-    void fetchCategories();
-  }, []);
-
-  const sectionLinks = useMemo(() => {
-    if (!categories.length) {
-      return sectionConfigs
-        .filter(s => s.slug !== 'latest-news')
-        .slice(0, 6)
-        .map(s => ({ label: s.label, to: `/${s.slug}` }));
-    }
-
-    return categories.map(cat => {
-      const config = sectionConfigs.find(s => s.backendSlug === cat.slug || s.slug === cat.slug);
-      return {
-        label: config?.label || cat.category_name,
-        to: `/${cat.slug}`,
-      };
-    });
-  }, [categories]);
+  const sectionLinks = sectionConfigs
+    .filter((section) => section.slug !== "latest-news")
+    .slice(0, 6)
+    .map((section) => ({ label: section.label, to: `/${section.slug}` }));
 
   const footerGroups = [
     {

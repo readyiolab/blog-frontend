@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { startTransition, useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Skeleton } from "@/components/ui/skeleton";
 import ArticleCard from "@/components/ArticleCard";
@@ -8,26 +8,44 @@ import { homepageMeta, sectionConfigs } from "@/lib/seo";
 import { articleService } from "@/services/articleService";
 import { categoryService } from "@/services/categoryService";
 import { lazy, Suspense } from "react";
+import homepageData from "@/data/generated/homepageData";
 
 const NewsletterForm = lazy(() => import("@/components/NewsletterForm"));
 import type { PublicArticle, PublicCategory } from "@/types/content";
 
+const scheduleBackgroundWork = (callback: () => void) => {
+  if (typeof window !== "undefined" && "requestIdleCallback" in window) {
+    const idleId = window.requestIdleCallback(callback, { timeout: 1500 });
+    return () => window.cancelIdleCallback(idleId);
+  }
+
+  const timeoutId = window.setTimeout(callback, 250);
+  return () => window.clearTimeout(timeoutId);
+};
+
 const Index = () => {
-  const [featured, setFeatured] = useState<PublicArticle[]>([]);
-  const [trending, setTrending] = useState<PublicArticle[]>([]);
-  const [latest, setLatest] = useState<PublicArticle[]>([]);
-  const [categories, setCategories] = useState<PublicCategory[]>([]);
-  const [criticalLoading, setCriticalLoading] = useState(true);
-  const [sectionsLoading, setSectionsLoading] = useState(true);
+  const [featured, setFeatured] = useState<PublicArticle[]>(homepageData.featured || []);
+  const [trending, setTrending] = useState<PublicArticle[]>(homepageData.trending || []);
+  const [latest, setLatest] = useState<PublicArticle[]>(homepageData.latest || []);
+  const [categories, setCategories] = useState<PublicCategory[]>(homepageData.categories || []);
+  const [criticalLoading, setCriticalLoading] = useState((homepageData.featured || []).length === 0);
+  const [sectionsLoading, setSectionsLoading] = useState(
+    (homepageData.trending || []).length === 0 ||
+    (homepageData.latest || []).length === 0 ||
+    (homepageData.categories || []).length === 0
+  );
 
   useEffect(() => {
     let active = true;
+    let cancelScheduledWork = () => {};
 
     const loadCritical = async () => {
       try {
         const featuredResponse = await articleService.getFeatured();
         if (active) {
-          setFeatured(featuredResponse.data || []);
+          startTransition(() => {
+            setFeatured(featuredResponse.data || []);
+          });
         }
       } finally {
         if (active) {
@@ -45,9 +63,11 @@ const Index = () => {
         ]);
 
         if (active) {
-          setTrending(trendingResponse.data || []);
-          setLatest(latestResponse.data || []);
-          setCategories(categoriesResponse.data || []);
+          startTransition(() => {
+            setTrending(trendingResponse.data || []);
+            setLatest(latestResponse.data || []);
+            setCategories(categoriesResponse.data || []);
+          });
         }
       } finally {
         if (active) {
@@ -56,11 +76,36 @@ const Index = () => {
       }
     };
 
-    void loadCritical();
-    void loadSections();
+    if ((homepageData.featured || []).length === 0) {
+      void loadCritical();
+    } else {
+      setCriticalLoading(false);
+      cancelScheduledWork = scheduleBackgroundWork(() => {
+        void loadCritical();
+      });
+    }
+
+    if (
+      (homepageData.trending || []).length === 0 ||
+      (homepageData.latest || []).length === 0 ||
+      (homepageData.categories || []).length === 0
+    ) {
+      void loadSections();
+    } else {
+      setSectionsLoading(false);
+      const cancelSectionsWork = scheduleBackgroundWork(() => {
+        void loadSections();
+      });
+      const previousCancel = cancelScheduledWork;
+      cancelScheduledWork = () => {
+        previousCancel();
+        cancelSectionsWork();
+      };
+    }
 
     return () => {
       active = false;
+      cancelScheduledWork();
     };
   }, []);
 

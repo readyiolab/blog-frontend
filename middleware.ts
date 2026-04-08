@@ -1,9 +1,7 @@
 // Vercel Edge Middleware for Dynamic Open Graph Injection
 
 export const config = {
-  matcher: [
-    '/((?!api|admin|assets|_next|favicon.ico|sitemap.xml|robots.txt|logo.webp).*)',
-  ],
+  matcher: ['/:path*'],
 };
 
 export default async function middleware(request: Request) {
@@ -14,6 +12,40 @@ export default async function middleware(request: Request) {
 
   const url = new URL(request.url);
   const pathParts = url.pathname.split('/').filter(Boolean);
+
+  const isImmutableAsset =
+    url.pathname.startsWith('/assets/') ||
+    /\.(?:ico|jpg|jpeg|png|gif|svg|webp|avif|js|css|woff|woff2)$/i.test(url.pathname);
+
+  if (isImmutableAsset) {
+    const bypassReq = new Request(request, {
+      headers: {
+        ...Object.fromEntries(request.headers),
+        'x-middleware-bypass': '1',
+      },
+    });
+
+    const res = await fetch(bypassReq);
+    const headers = new Headers(res.headers);
+    headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+
+    return new Response(res.body, {
+      status: res.status,
+      statusText: res.statusText,
+      headers,
+    });
+  }
+
+  // Skip middleware work for API/admin routes.
+  if (pathParts[0] === 'api' || pathParts[0] === 'admin') {
+    const bypassReq = new Request(request, {
+      headers: {
+        ...Object.fromEntries(request.headers),
+        'x-middleware-bypass': '1',
+      },
+    });
+    return fetch(bypassReq);
+  }
 
   // We are only interested in modifying specific article routes e.g. /category/article-slug
   if (pathParts.length === 2 && !['assets', 'api', 'admin'].includes(pathParts[0])) {
@@ -86,7 +118,11 @@ export default async function middleware(request: Request) {
   }
 
   // Pass-through for any unmatched or failed paths
-  const bypassReq = new Request(request);
-  bypassReq.headers.set('x-middleware-bypass', '1');
+  const bypassReq = new Request(request, {
+    headers: {
+      ...Object.fromEntries(request.headers),
+      'x-middleware-bypass': '1',
+    },
+  });
   return fetch(bypassReq);
 }
