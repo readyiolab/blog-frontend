@@ -2,348 +2,253 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export const policyContent: Record<string, React.ReactNode> = {
-    "about-us": (
-        <div className="space-y-8">
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Introduction</h2>
-                <p className="mb-3">Beans News is an independent digital news platform.</p>
-                <p className="mb-3">The platform publishes reliable news and analysis across multiple categories. We focus on delivering accurate, fact-checked, and timely journalism.</p>
-                <p>Stay updated with our coverage on <Link to="/india-news" className="text-primary hover:underline font-medium">India News</Link>, <Link to="/world-news" className="text-primary hover:underline font-medium">World News</Link>, <Link to="/business-news" className="text-primary hover:underline font-medium">Business News</Link>, <Link to="/finance-news" className="text-primary hover:underline font-medium">Finance News</Link>, <Link to="/sports-news" className="text-primary hover:underline font-medium">Sports News</Link>, and <Link to="/health-wellness" className="text-primary hover:underline font-medium">Health and Wellness News</Link>.</p>
-            </section>
+  "about-us": (
+    <div className="space-y-8">
+      <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+        <h2 className="text-xl font-bold mb-2 text-primary">At a Glance</h2>
+        <p className="text-lg leading-relaxed">
+          Beans News is a global digital media platform that shares startup news, AI tools, funding updates, and digital marketing strategies to help founders and creators grow faster.
+        </p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Our Mission</h2>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Delivering accurate journalism</li>
-                    <li>Promoting responsible news reporting</li>
-                    <li>Providing accessible and transparent news coverage</li>
-                    <li>Reducing misinformation in digital media</li>
-                </ul>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Our Story</h2>
+        <p className="mb-4">Beans News is built on one simple idea - share what actually works.</p>
+        <p className="mb-4">
+          I’m Deepak Singh, founder of Beans News, based in Gurugram, India. I created this platform after testing multiple AI tools, marketing strategies, and business ideas.
+        </p>
+        <p className="mb-4">
+          Most online content sounds good but doesn’t deliver results. I’ve seen tools fail and strategies not work - but I’ve also seen small changes create massive growth.
+        </p>
+        <p>That’s what Beans News is about.</p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mb-4">What We Cover</h2>
-                <div className="grid md:grid-cols-2 gap-6 mt-4">
-                    <div className="border p-4 rounded-xl shadow-sm bg-card hover:shadow-md transition-shadow">
-                        <h3 className="font-bold text-lg mb-2 text-primary">India News</h3>
-                        <p className="text-sm text-muted-foreground">Coverage of national developments, policies, economy, and society.</p>
-                    </div>
-                    <div className="border p-4 rounded-xl shadow-sm bg-card hover:shadow-md transition-shadow">
-                        <h3 className="font-bold text-lg mb-2 text-primary">World News</h3>
-                        <p className="text-sm text-muted-foreground">International events, global politics, and international relations.</p>
-                    </div>
-                    <div className="border p-4 rounded-xl shadow-sm bg-card hover:shadow-md transition-shadow">
-                        <h3 className="font-bold text-lg mb-2 text-primary">Business News</h3>
-                        <p className="text-sm text-muted-foreground">Corporate developments, startups, market trends, and entrepreneurship.</p>
-                    </div>
-                    <div className="border p-4 rounded-xl shadow-sm bg-card hover:shadow-md transition-shadow">
-                        <h3 className="font-bold text-lg mb-2 text-primary">Finance News</h3>
-                        <p className="text-sm text-muted-foreground">Financial markets, investment trends, banking sector, and economic policy.</p>
-                    </div>
-                    <div className="border p-4 rounded-xl shadow-sm bg-card hover:shadow-md transition-shadow">
-                        <h3 className="font-bold text-lg mb-2 text-primary">Sports News</h3>
-                        <p className="text-sm text-muted-foreground">Major sporting events, tournaments, player performance and updates.</p>
-                    </div>
-                    <div className="border p-4 rounded-xl shadow-sm bg-card hover:shadow-md transition-shadow">
-                        <h3 className="font-bold text-lg mb-2 text-primary">Health and Wellness News</h3>
-                        <p className="text-sm text-muted-foreground">Medical research, public health updates, and wellness insights.</p>
-                    </div>
-                </div>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Editorial Team</h2>
-                <p className="mb-2">The Beans News Editorial Team manages publishing and verification.</p>
-                <p className="mb-2">Our editors review all content before publication.</p>
-                <p>Articles follow strict editorial standards for accuracy and credibility.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Commitment to Accuracy</h2>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Fact-checking process</li>
-                    <li>Source verification</li>
-                    <li>Editorial review</li>
-                    <li>Updates and corrections where necessary</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Transparency</h2>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Clear separation of editorial content and advertising</li>
-                    <li>Ethical reporting standards</li>
-                    <li>Editorial independence</li>
-                </ul>
-            </section>
-
-            <section className="bg-muted p-6 rounded-2xl">
-                <h2 className="text-2xl font-bold mb-4">Contact Information</h2>
-                <p>Email: <a href="mailto:thebeansnews@gmail.com" className="text-primary hover:underline font-medium">thebeansnews@gmail.com</a></p>
-                <p className="mt-2">For more details, visit our <Link to="/contact-us" className="text-primary hover:underline font-medium">Contact Us page</Link>.</p>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">What We Focus On</h2>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="p-4 border rounded-xl bg-card">
+            <h3 className="font-bold text-primary mb-1">AI Tools</h3>
+            <p className="text-sm">Tools that actually improve productivity and workflow.</p>
+          </div>
+          <div className="p-4 border rounded-xl bg-card">
+            <h3 className="font-bold text-primary mb-1">Growth Strategies</h3>
+            <p className="text-sm">Real-world startup growth tactics that deliver ROI.</p>
+          </div>
+          <div className="p-4 border rounded-xl bg-card">
+            <h3 className="font-bold text-primary mb-1">Funding Insights</h3>
+            <p className="text-sm">Transparent updates on venture capital and investments.</p>
+          </div>
+          <div className="p-4 border rounded-xl bg-card">
+            <h3 className="font-bold text-primary mb-1">Digital Marketing</h3>
+            <p className="text-sm">Strategies that actually convert in the current market.</p>
+          </div>
         </div>
-    ),
-    "contact-us": (
-        <div className="space-y-8">
-            <section>
-                <p className="text-lg">We welcome our readers to contact Beans News for editorial inquiries, news tips, corrections, and partnership discussions.</p>
-            </section>
+      </section>
 
-            <section className="bg-muted p-6 rounded-2xl border">
-                <h2 className="text-2xl font-bold mb-2">General Contact</h2>
-                <p>Email: <a href="mailto:thebeansnews@gmail.com" className="text-primary hover:underline font-medium text-lg">thebeansnews@gmail.com</a></p>
-            </section>
+      <section className="bg-muted p-6 rounded-2xl">
+        <h2 className="text-2xl font-bold mb-4">Why Trust Us</h2>
+        <ul className="space-y-3">
+          <li className="flex items-start gap-2">
+            <span className="text-primary font-bold">✓</span>
+            <span>Real experience-based content</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-primary font-bold">✓</span>
+            <span>Data-backed insights</span>
+          </li>
+          <li className="flex items-start gap-2">
+            <span className="text-primary font-bold">✓</span>
+            <span>No fake hype</span>
+          </li>
+        </ul>
+      </section>
+      
+      <p className="text-sm text-muted-foreground italic">
+        Even though Beans News is based in India, our content is designed for a global audience including the US, UK, and other markets.
+      </p>
+    </div>
+  ),
+  "contact-us": (
+    <div className="space-y-8">
+      <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+        <h2 className="text-xl font-bold mb-2 text-primary">Quick Contact</h2>
+        <p className="text-lg">
+          You can contact Beans News for business inquiries, guest posting, and collaborations via email.
+        </p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Editorial Enquiries</h2>
-                <p className="mb-3">Contact our editorial team regarding:</p>
-                <ul className="list-disc pl-6 space-y-2 mb-4">
-                    <li>Article corrections</li>
-                    <li>Fact verification</li>
-                    <li>Reporting feedback</li>
-                </ul>
-                <p>Email: <a href="mailto:thebeansnews@gmail.com" className="text-primary hover:underline font-medium">thebeansnews@gmail.com</a></p>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Get In Touch</h2>
+        <p className="mb-6">We’d love to hear from you. Reach out to us for:</p>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+          <li className="p-4 border rounded-xl bg-card">Business inquiries</li>
+          <li className="p-4 border rounded-xl bg-card">Guest posts</li>
+          <li className="p-4 border rounded-xl bg-card">Partnerships</li>
+          <li className="p-4 border rounded-xl bg-card">Feedback</li>
+        </ul>
 
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Report an Issue</h2>
-                <p className="mb-3">Please let us know if you find any issues on our website:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Inaccurate information</li>
-                    <li>Copyright concerns</li>
-                    <li>Broken links</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Follow Beans News</h2>
-                <p>Connect with us on Twitter: <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium">@BeansNews</a></p>
-            </section>
+        <div className="space-y-4 bg-muted p-6 rounded-2xl border">
+          <p className="flex items-center gap-3">
+            <span className="font-bold">📧 Email:</span>
+            <a href="mailto:thebeansnews@gmail.com" className="text-primary hover:underline font-medium">thebeansnews@gmail.com</a>
+          </p>
+          <p className="flex items-center gap-3">
+            <span className="font-bold">📍 Location:</span>
+            <span>Gurugram, Haryana, India</span>
+          </p>
+          <p className="text-sm text-muted-foreground mt-4">We usually respond within 24–48 hours.</p>
         </div>
-    ),
-    "privacy-policy": (
-        <div className="space-y-6">
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">1. Introduction</h2>
-                <p>Beans News respects and protects user privacy.</p>
-            </section>
+      </section>
+    </div>
+  ),
+  "write-for-us": (
+    <div className="space-y-8">
+      <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+        <h2 className="text-xl font-bold mb-2 text-primary">Contribute</h2>
+        <p className="text-lg">
+          Beans News accepts guest posts on startups, AI, finance, and digital marketing with a focus on real insights and case studies.
+        </p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">2. Information We Collect</h2>
-                <p>Types of information collected:</p>
-                <ul>
-                    <li>Personal information (email communication)</li>
-                    <li>Log files</li>
-                    <li>Device information</li>
-                    <li>Cookies</li>
-                    <li>Analytics data</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">3. How We Use Information</h2>
-                <p>Information is used to:</p>
-                <ul>
-                    <li>Improve website experience</li>
-                    <li>Analyze site traffic</li>
-                    <li>Enhance content quality</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">4. Cookies</h2>
-                <p>Cookies may be used for:</p>
-                <ul>
-                    <li>Website functionality</li>
-                    <li>Analytics</li>
-                    <li>Advertising services including Google AdSense</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">5. Third Party Advertising</h2>
-                <p>Advertising partners may use cookies and tracking technologies.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">6. Data Protection</h2>
-                <p>We take security measures to protect information.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">7. Children's Information</h2>
-                <p>Beans News does not knowingly collect data from children under 13.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">8. User Consent</h2>
-                <p>Users agree to the privacy policy when using the website.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">9. Contact Information</h2>
-                <p>Email: <a href="mailto:thebeansnews@gmail.com" className="text-primary hover:underline">thebeansnews@gmail.com</a></p>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Topics We Accept</h2>
+        <div className="grid grid-cols-2 gap-3 mb-8">
+          <div className="p-3 border rounded-lg bg-card text-center">AI tools & startups</div>
+          <div className="p-3 border rounded-lg bg-card text-center">Funding & finance</div>
+          <div className="p-3 border rounded-lg bg-card text-center">Marketing strategies</div>
+          <div className="p-3 border rounded-lg bg-card text-center">Startup case studies</div>
         </div>
-    ),
-    "disclaimer": (
-        <div className="space-y-6">
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">1. General Information</h2>
-                <p>Content published on Beans News is for informational purposes.</p>
-            </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">2. Accuracy of Information</h2>
-                <p>Beans News strives for accuracy but does not guarantee completeness of information.</p>
-            </section>
+        <h2 className="text-2xl font-bold mb-4">Submission Guidelines</h2>
+        <ul className="list-disc pl-6 space-y-2 mb-8">
+          <li>Minimum 800 words</li>
+          <li>100% original content</li>
+          <li>Must include real examples and data</li>
+        </ul>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">3. External Links</h2>
-                <p>Beans News may include links to external websites and is not responsible for their content.</p>
-            </section>
+        <h2 className="text-2xl font-bold mb-4">What You Get</h2>
+        <ul className="list-disc pl-6 space-y-2 mb-8">
+          <li>Author credit and bio</li>
+          <li>High-quality backlink</li>
+          <li>Global exposure to founders and creators</li>
+        </ul>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">4. Professional Advice</h2>
-                <p>Content should not be considered:</p>
-                <ul>
-                    <li>Financial advice</li>
-                    <li>Medical advice</li>
-                    <li>Legal advice</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">5. Consent</h2>
-                <p>Users agree to this disclaimer by using the website.</p>
-            </section>
+        <div className="bg-primary text-primary-foreground p-6 rounded-2xl text-center">
+          <p className="mb-2">Ready to contribute?</p>
+          <p className="text-xl font-bold">Submit: thebeansnews@gmail.com</p>
         </div>
-    ),
-    "editorial-policy": (
-        <div className="space-y-6">
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">1. Editorial Mission</h2>
-                <p>Provide accurate and responsible journalism.</p>
-            </section>
+      </section>
+    </div>
+  ),
+  "privacy-policy": (
+    <div className="space-y-8">
+      <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+        <h2 className="text-xl font-bold mb-2 text-primary">Summary</h2>
+        <p className="text-lg">
+          Beans News collects limited data like email and cookies to improve user experience and does not sell personal information.
+        </p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">2. Editorial Independence</h2>
-                <p>Editorial decisions are independent from advertisers and sponsors.</p>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Information We Collect</h2>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Name (if submitted via contact or comments)</li>
+          <li>Email address</li>
+          <li>Cookies and usage data</li>
+        </ul>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">3. Fact Checking</h2>
-                <p>Content undergoes:</p>
-                <ul>
-                    <li>Source verification</li>
-                    <li>Editorial review</li>
-                    <li>Accuracy checks</li>
-                </ul>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">How We Use It</h2>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>To improve our content and site performance</li>
+          <li>To analyze traffic patterns</li>
+          <li>To respond to your queries</li>
+        </ul>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">4. Corrections Policy</h2>
-                <p>Errors are corrected promptly and transparently.</p>
-            </section>
+      <section className="bg-muted p-6 rounded-2xl">
+        <h2 className="text-xl font-bold mb-2">Ads & Cookies</h2>
+        <p>
+          We use Google AdSense, which may use cookies to show relevant ads based on your interests.
+        </p>
+      </section>
+    </div>
+  ),
+  "editorial-policy": (
+    <div className="space-y-8">
+      <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+        <h2 className="text-xl font-bold mb-2 text-primary">Our Standard</h2>
+        <p className="text-lg">
+          All content on Beans News is verified, original, and focused on real-world usefulness.
+        </p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">5. Ethical Standards</h2>
-                <p>Editorial content follows professional journalism standards.</p>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Our Approach</h2>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>Real insights over theoretical fluff</li>
+          <li>Clear and simple language for global readers</li>
+          <li>No misleading claims or clickbait</li>
+        </ul>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">6. Sponsored Content</h2>
-                <p>Sponsored or promotional content is clearly labeled.</p>
-            </section>
+      <section className="bg-muted p-6 rounded-2xl">
+        <h2 className="text-xl font-bold mb-2">AI Usage</h2>
+        <p className="mb-4">We may use AI tools for research and drafts, but:</p>
+        <ul className="list-disc pl-6 space-y-2 font-medium">
+          <li>Every article is human-edited</li>
+          <li>All facts are human-verified</li>
+        </ul>
+      </section>
+    </div>
+  ),
+  "disclaimer": (
+    <div className="space-y-8">
+      <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+        <h2 className="text-xl font-bold mb-2 text-primary">Important</h2>
+        <p className="text-lg">
+          All content on Beans News is for informational purposes only and does not guarantee financial or business results.
+        </p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">7. AI Assisted Research</h2>
-                <p>Technology tools may assist research but human editors review all published content.</p>
-            </section>
-        </div>
-    ),
-    "terms-and-conditions": (
-        <div className="space-y-6">
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">1. Acceptance of Terms</h2>
-                <p>Using the website indicates agreement with these terms.</p>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">No Guarantees</h2>
+        <p className="mb-4 text-lg">We do not guarantee specific outcomes regarding:</p>
+        <ul className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-center">
+          <li className="p-4 border rounded-xl bg-card font-bold">Income</li>
+          <li className="p-4 border rounded-xl bg-card font-bold">Business Success</li>
+          <li className="p-4 border rounded-xl bg-card font-bold">Marketing Results</li>
+        </ul>
+        <p className="mt-8 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-xl text-center font-semibold">
+          Always do your own research before making financial or business decisions.
+        </p>
+      </section>
+    </div>
+  ),
+  "terms-and-conditions": (
+    <div className="space-y-8">
+      <section className="bg-primary/5 p-6 rounded-2xl border border-primary/10">
+        <h2 className="text-xl font-bold mb-2 text-primary">Agreement</h2>
+        <p className="text-lg">
+          By using Beans News, you agree to follow our terms related to content usage and website behavior.
+        </p>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">2. Intellectual Property</h2>
-                <p>All content on Beans News belongs to Beans News unless stated otherwise.</p>
-            </section>
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Use of Content</h2>
+        <ul className="list-disc pl-6 space-y-2">
+          <li>No copying or reproduction without explicit permission</li>
+          <li>Content is for informational use only</li>
+        </ul>
+      </section>
 
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">3. Use of Website</h2>
-                <p>Users must not:</p>
-                <ul>
-                    <li>Copy articles without permission</li>
-                    <li>Misuse website content</li>
-                    <li>Distribute copyrighted material</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">4. Limitation of Liability</h2>
-                <p>Beans News is not liable for losses resulting from use of website content.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">5. Changes to Terms</h2>
-                <p>Terms may be updated periodically.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mt-8 mb-4">6. Contact Information</h2>
-                <p>Email: <a href="mailto:thebeansnews@gmail.com" className="text-primary hover:underline">thebeansnews@gmail.com</a></p>
-            </section>
-        </div>
-    ),
-    "write-for-us": (
-        <div className="space-y-8">
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Introduction</h2>
-                <p className="text-lg">Beans News welcomes journalists, writers, and contributors to submit articles.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Topics Accepted</h2>
-                <ul className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                    <li className="bg-muted p-4 rounded-xl text-center font-medium border">India News</li>
-                    <li className="bg-muted p-4 rounded-xl text-center font-medium border">World News</li>
-                    <li className="bg-muted p-4 rounded-xl text-center font-medium border">Business News</li>
-                    <li className="bg-muted p-4 rounded-xl text-center font-medium border">Finance News</li>
-                    <li className="bg-muted p-4 rounded-xl text-center font-medium border">Sports News</li>
-                    <li className="bg-muted p-4 rounded-xl text-center font-medium border">Health and Wellness News</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Submission Guidelines</h2>
-                <p className="mb-3">Articles must:</p>
-                <ul className="list-disc pl-6 space-y-2">
-                    <li>Be original</li>
-                    <li>Contain accurate information</li>
-                    <li>Include credible sources</li>
-                    <li>Be minimum 800 words</li>
-                </ul>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">Editorial Review Process</h2>
-                <p className="p-4 bg-primary/5 border border-primary/20 rounded-xl">All submissions are reviewed by the Beans News Editorial Team before publication.</p>
-            </section>
-
-            <section>
-                <h2 className="text-2xl font-bold mb-4">How to Submit</h2>
-                <div className="bg-muted p-6 rounded-2xl border">
-                    <p className="mb-2">Send article submissions to:</p>
-                    <p className="text-xl mb-4"><a href="mailto:thebeansnews@gmail.com" className="font-bold text-primary hover:underline">thebeansnews@gmail.com</a></p>
-                    <p><strong>Subject line:</strong> Guest Article Submission – Beans News</p>
-                </div>
-            </section>
-        </div>
-    ),
+      <section>
+        <h2 className="text-2xl font-bold mb-4">Liability</h2>
+        <p className="p-4 border rounded-xl bg-muted whitespace-pre-wrap">
+          We are not responsible for any losses or damages resulting from the use of our content or website.
+        </p>
+      </section>
+    </div>
+  ),
 };

@@ -9,6 +9,7 @@ import { articleService } from "@/services/articleService";
 import { categoryService } from "@/services/categoryService";
 import { lazy, Suspense } from "react";
 import homepageData from "@/data/generated/homepageData";
+import FAQSection from "@/components/FAQSection";
 
 const NewsletterForm = lazy(() => import("@/components/NewsletterForm"));
 import type { PublicArticle, PublicCategory } from "@/types/content";
@@ -211,10 +212,12 @@ const Index = () => {
             );
           })}
 
-        <section className="rounded-2xl border border-border bg-card p-6">
+        <FAQSection />
+
+        <section className="mt-16 rounded-2xl border border-border bg-card p-6">
           <h2 className="text-2xl font-semibold">Newsletter Signup</h2>
           <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-            Get breaking US and global news alerts, business updates, and editorial picks delivered daily.
+            Get real-time startup news, AI tools, and digital growth strategies delivered daily to your inbox.
           </p>
           <Suspense fallback={<div className="mt-4 h-[200px] w-full animate-pulse rounded-lg bg-muted" />}>
             <NewsletterForm />

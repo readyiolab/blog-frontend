@@ -21,151 +21,118 @@ export const formatArticleDate = (value?: string) => {
 
 export const sectionConfigs: SectionConfig[] = [
   {
-    slug: "india-news",
-    backendSlug: "india-news",
-    label: "India News",
-    metaTitle: "India News Today - Politics, Economy & Latest Updates",
+    slug: "tech-ai-startups",
+    backendSlug: "tech-ai-startups",
+    label: "Tech & AI Startups",
+    metaTitle: "Top AI Startups & Tech Trends in 2026",
     metaDescription:
-      "Latest India news covering politics, economy, technology, and national updates. Read breaking Indian news stories at Beans News.",
-    keywords: ["India news today", "Indian politics news", "India economy news", "breaking India news", "latest news India"],
+      "Explore the fastest-growing AI startups, SaaS tools, and tech innovations shaping the future of business.",
+    keywords: ["ai", "artificial general intelligence", "ai chat", "open ai", "startup", "startup company"],
   },
   {
-    slug: "world-news",
-    backendSlug: "world-news",
-    label: "World News",
-    metaTitle: "World News Today - Global Politics, Economy & Headlines",
+    slug: "startup-finance",
+    backendSlug: "startup-finance",
+    label: "Startup Finance & Funding",
+    metaTitle: "Startup Funding News & Investment Trends",
     metaDescription:
-      "Breaking world news including international politics, economy, conflicts, and global developments updated daily.",
-    keywords: ["world news today", "international news", "global politics news", "latest world headlines", "global economy news"],
+      "Track funding rounds, venture capital trends, and startup investments globally with real insights.",
+    keywords: ["googlefinance", "finance", "financial advisor", "ai startups", "funding", "crowdfunding for startups", "get funding for startup"],
   },
   {
-    slug: "business",
-    backendSlug: "business",
-    label: "Business",
-    metaTitle: "Business News Today - US Markets, Companies & Economy",
+    slug: "digital-marketing",
+    backendSlug: "digital-marketing",
+    label: "Digital Marketing & Growth",
+    metaTitle: "Startup Growth & Digital Marketing Strategies",
     metaDescription:
-      "Latest US business news, company updates, startups, and economic trends affecting global markets.",
-    keywords: ["business news USA", "company news", "startup news", "US economy news", "corporate news"],
+      "Learn how startups grow using SEO, ads, and viral marketing strategies in 2026.",
+    keywords: ["digital marketing", "content marketing", "marketing companies", "best digital marketing companies", "digital marketing agency for startups", "growth marketing", "AI marketing"],
   },
   {
-    slug: "technology",
-    backendSlug: "technology",
-    label: "Technology",
-    metaTitle: "Technology News - Gadgets, AI & Tech Trends",
-    metaDescription: "Follow latest technology news, gadgets, AI developments and tech industry updates.",
-    keywords: ["tech news", "gadgets", "artificial intelligence", "tech reviews"],
-  },
-  {
-    slug: "entertainment",
-    backendSlug: "entertainment",
-    label: "Entertainment",
-    metaTitle: "Entertainment News - Movies, Music & Celebrity Updates",
-    metaDescription: "Latest entertainment news covering movies, music, celebrities and pop culture.",
-    keywords: ["entertainment news", "movie news", "celebrity gossip", "music updates"],
-  },
-  {
-    slug: "finance-news",
-    backendSlug: "finance-news",
-    label: "Finance News",
-    metaTitle: "Finance News - Stock Market, Inflation & Economy",
+    slug: "founder-stories",
+    backendSlug: "founder-stories",
+    label: "Founder Stories & Case Studies",
+    metaTitle: "Startup Success & Failure Stories",
     metaDescription:
-      "Finance news covering US stock market, inflation, interest rates, cryptocurrency and investment trends.",
-    keywords: ["finance news", "stock market news", "inflation news", "federal reserve news", "crypto market news"],
+      "Read real startup journeys, failures, and lessons from founders worldwide.",
+    keywords: ["start up business ideas", "founder", "the founder", "startup company", "ai startups", "startup funding", "funding for start up businesses", "best startup business"],
   },
   {
-    slug: "sports",
-    backendSlug: "sports",
-    label: "Sports News",
-    metaTitle: "Sports News - NBA, NFL, Soccer & Global Sports",
+    slug: "side-hustles",
+    backendSlug: "side-hustles",
+    label: "Side Hustles & Online Business",
+    metaTitle: "Best Online Business Ideas & Side Hustles 2026",
     metaDescription:
-      "Latest sports news including NBA, NFL, soccer, tennis, and major sporting events from around the world.",
-    keywords: ["sports news today", "nba news", "nfl news", "soccer news", "sports headlines"],
-  },
-  {
-    slug: "health-wellness",
-    backendSlug: "health-wellness",
-    label: "Health & Wellness",
-    metaTitle: "Health & Wellness News - Fitness, Nutrition & Medical Updates",
-    metaDescription:
-      "Latest health news, wellness tips, fitness trends, nutrition advice, and medical research updates.",
-    keywords: ["health news", "wellness tips", "fitness trends", "nutrition advice", "medical research news"],
-  },
-  {
-    slug: "opinion",
-    backendSlug: "opinion",
-    label: "Opinion",
-    metaTitle: "Opinion - Analysis, Editorials & Expert Perspectives",
-    metaDescription:
-      "Read editorials, opinion pieces, and expert analysis on politics, economy, business, and society.",
-    keywords: ["opinion news", "editorials", "expert analysis", "news commentary"],
+      "Discover profitable side hustles, online business ideas, and passive income strategies.",
+    keywords: ["side hustle", "business ideas", "passive income ideas", "small business ideas", "ecommerce business ideas", "stealth startup", "Online Business"],
   },
   {
     slug: "latest-news",
     backendSlug: "latest-news",
     label: "Latest News",
-    metaTitle: "Latest News Today - Breaking Headlines From the USA and Beyond",
+    metaTitle: "Latest News Today - Startup & Tech Updates | Beans News",
     metaDescription:
-      "Live latest news updates from the USA and around the world. Breaking headlines, business, finance, health, and sports.",
-    keywords: ["latest news", "breaking headlines", "today news", "usa breaking news"],
+      "Live latest updates from the startup world, AI tools, and digital growth strategies. Breaking headlines for founders.",
+    keywords: ["latest news", "startup news", "tech headlines", "ai updates"],
   },
 ];
 
 export const homepageMeta = {
-  title: "Beans News - Breaking US & Global News Today",
+  title: "Beans News | Startup, AI, Finance & Digital Growth Insights",
   description:
-    "Latest breaking news from the USA and around the world. Business, finance, sports, health and trending stories updated daily at Beans News.",
+    "Get real-time startup news, AI tools, funding updates, and digital marketing strategies. Data-driven insights for founders, marketers, and creators.",
   keywords: [
-    "breaking news USA",
-    "latest news USA",
-    "world news today",
-    "US business news",
-    "sports news USA",
-    "health news",
+    "startup news",
+    "AI tools",
+    "startup funding",
+    "digital marketing",
+    "growth strategies",
+    "founder stories",
+    "online business ideas",
   ],
 };
 
 export const staticPages = {
   "about-us": {
-    title: "About Us - Beans News",
+    title: "About Beans News",
     heading: "About Beans News",
     description:
-      "Beans News is an independent digital news platform publishing reliable news and analysis across multiple categories.",
+      "Beans News is a global digital media platform that shares startup news, AI tools, funding updates, and digital marketing strategies.",
   },
   "contact-us": {
-    title: "Contact Us - Beans News",
-    heading: "Contact Beans News",
+    title: "Contact Beans News",
+    heading: "Contact Us",
     description:
-      "Reach the Beans News editorial desk for corrections, partnerships, news tips, and general inquiries.",
+      "Contact Beans News for business inquiries, guest posting, and collaborations via email.",
   },
   "privacy-policy": {
-    title: "Privacy Policy - Beans News",
-    heading: "Privacy Policy for Beans News",
+    title: "Privacy Policy",
+    heading: "Privacy Policy",
     description:
-      "Learn how Beans News collects, uses, and protects reader information and data across the website.",
+      "Beans News collects limited data like email and cookies to improve user experience and does not sell personal information.",
   },
   disclaimer: {
-    title: "Disclaimer - Beans News",
-    heading: "Disclaimer for Beans News",
+    title: "Disclaimer",
+    heading: "Disclaimer",
     description:
-      "General information, accuracy, and external links disclaimers for Beans News content.",
+      "All content on Beans News is for informational purposes only and does not guarantee financial or business results.",
   },
   "editorial-policy": {
-    title: "Editorial Policy - Beans News",
-    heading: "Editorial Policy – Beans News",
+    title: "Editorial Policy",
+    heading: "Editorial Policy",
     description:
-      "Beans News editorial standards covering mission, independence, fact-checking, and corrections.",
+      "All content on Beans News is verified, original, and focused on real-world usefulness.",
   },
   "terms-and-conditions": {
-    title: "Terms & Conditions - Beans News",
-    heading: "Terms and Conditions",
+    title: "Terms and Conditions",
+    heading: "Terms & Conditions",
     description:
-      "The terms and conditions governing access to and use of the Beans News website and content.",
+      "By using Beans News, you agree to follow our terms related to content usage and website behavior.",
   },
   "write-for-us": {
-    title: "Write for Us - Beans News",
-    heading: "Write for Beans News",
+    title: "Write For Us – Beans News",
+    heading: "Write for Us",
     description:
-      "Submit your original articles and contribute to Beans News reporting across multiple news categories.",
+      "Beans News accepts guest posts on startups, AI, finance, and digital marketing with a focus on real insights.",
   },
 };
 

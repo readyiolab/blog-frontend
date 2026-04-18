@@ -38,7 +38,7 @@ const Footer = () => {
           <div>
             <h3 className="font-headline text-2xl font-bold">Beans News</h3>
             <p className="mt-3 text-sm text-primary-foreground/80">
-              Breaking US and global news focused on business, finance, sports, health, and expert analysis.
+              Global digital media platform sharing startup news, AI tools, funding updates, and digital marketing strategies to help founders and creators grow faster.
             </p>
           </div>
           {footerGroups.map((group) => (
