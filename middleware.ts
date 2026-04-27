@@ -15,14 +15,12 @@ export default async function middleware(request: Request) {
   const url = new URL(request.url);
   const pathParts = url.pathname.split('/').filter(Boolean);
 
-  // We are only interested in modifying specific article routes e.g. /category/article-slug
+  // Handle Article Routes: /category/article-slug
   if (pathParts.length === 2 && !['assets', 'api', 'admin'].includes(pathParts[0])) {
     const articleSlug = pathParts[1];
     
     try {
-      // Create a URL pointing to the actual index.html file hosted on the same domain
       const htmlUrl = new URL(url.origin + '/index.html');
-      
       const bypassReq = new Request(htmlUrl.toString(), {
         headers: {
           ...Object.fromEntries(request.headers),
@@ -78,10 +76,53 @@ export default async function middleware(request: Request) {
               },
             });
           }
+        } else if (apiRes.status === 404) {
+          // Article not found, return 404 status with index.html content
+          return new Response(html, {
+            status: 404,
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'no-cache'
+            },
+          });
         }
       }
     } catch (error) {
       console.error('Edge Middleware SEO Error:', error);
+    }
+  }
+
+  // Handle Category Routes: /category-slug
+  const staticPages = ['about-us', 'contact-us', 'privacy-policy', 'disclaimer', 'editorial-policy', 'terms-and-conditions', 'write-for-us'];
+  if (pathParts.length === 1 && !['assets', 'api', 'admin', 'favicon.ico', 'sitemap.xml', 'robots.txt', ...staticPages].includes(pathParts[0])) {
+    const categorySlug = pathParts[0];
+    
+    try {
+      const apiRes = await fetch(`https://api.beansnews.com/api/categories/slug/${categorySlug}`);
+      
+      if (!apiRes.ok && apiRes.status === 404) {
+        const htmlUrl = new URL(url.origin + '/index.html');
+        const bypassReq = new Request(htmlUrl.toString(), {
+          headers: {
+            ...Object.fromEntries(request.headers),
+            'x-middleware-bypass': '1'
+          }
+        });
+        const htmlRes = await fetch(bypassReq);
+        
+        if (htmlRes.ok) {
+          const html = await htmlRes.text();
+          return new Response(html, {
+            status: 404,
+            headers: {
+              'Content-Type': 'text/html; charset=utf-8',
+              'Cache-Control': 'no-cache'
+            },
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Edge Middleware Category Validation Error:', error);
     }
   }
 
